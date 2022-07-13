@@ -1,5 +1,5 @@
-import json
-import requests
+import json, requests, os
+from os.path import dirname
 from azure.eventhub import EventHubProducerClient, EventData
 
 # binance api 정의
@@ -8,7 +8,8 @@ symbols = '["AVAXUSDT","BNBUSDT","DOGEUSDT","TRXUSDT","ETHUSDT","DOTUSDT","BTCUS
 url = api + symbols
 
 # config 정보로 event hub 정보 정의
-f = open("./config.json", "r") 
+conf_File_path = os.getcwd() + "\\azure_eventHub_to_stream"  + "\\config.json"
+f = open(conf_File_path, "r") 
 json_data = json.load(f)
 connection_str = json_data['conn_str']
 event_hub_path = json_data['event_hub_path']
